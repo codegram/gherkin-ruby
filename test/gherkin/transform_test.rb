@@ -1,13 +1,5 @@
-require_relative 'test_helper'
+require_relative '../test_helper'
 require 'parslet'
-require 'pp'
-
-def t(input)
-  parser = Gherkin::Parser.new
-  result = parser.parse(input)
-  transform = Gherkin::Transform.new
-  transform.apply(result)
-end
 
 module Gherkin
   describe 'Feature parsing' do
@@ -21,7 +13,10 @@ module Gherkin
     Given foo
     Then bar
 """
-      @result = t(@scenario)
+      parser    = Gherkin::Parser.new
+      result    = parser.parse(@scenario)
+      transform = Gherkin::Transform.new
+      @result   = transform.apply(result)
     end
 
     it 'generates a nice tree' do
