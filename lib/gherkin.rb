@@ -5,5 +5,11 @@ require_relative 'gherkin/parser'
 require_relative 'gherkin/transform'
 
 module Gherkin
-  # Your code goes here...
+  def self.parse(input)
+    parser    = Parser.new
+    transform = Transform.new
+
+    parsed = parser.parse input
+    transform.apply(parsed)
+  end
 end
