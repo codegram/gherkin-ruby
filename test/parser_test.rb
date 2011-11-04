@@ -23,7 +23,7 @@ module Gherkin
     rule(:step_keyword) { str('Given') | str('When') | str('Then') | str('And') | str('But') }
 
     rule(:comment) { str('#') >> match('.').repeat(1).as(:comment) }
-    rule(:description) { indent(2) >> match('.').repeat(1) }
+    rule(:description) { indent(2) >> match('.').repeat(1).as(:description) }
   end
 
   describe 'Feature parsing' do
@@ -61,6 +61,14 @@ module Gherkin
   describe 'Comment parsing' do
     it 'parses a comment ignoring its content' do
       p(:comment, "# My comment").size.must_be :>, 0
+    end
+  end
+
+  describe 'Description parsing' do
+    it 'parses descriptions ignoring their content' do
+      p(:description, "  In order to know what the heck is Gherkin").size.must_be :>, 0
+      p(:description, "  As a developer").size.must_be :>, 0
+      p(:description, "  I want it to behave in an expected way").size.must_be :>, 0
     end
   end
 end
