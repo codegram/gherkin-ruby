@@ -1,25 +1,35 @@
 module Gherkin
   module AST
-    class Feature
+    class Node
+      attr_reader :line, :column
+    end
+
+    class Feature < Node
       attr_reader :name, :scenarios
       def initialize(name, scenarios)
-        @name      = name
+        @line, @column = name.line_and_column
+
+        @name      = name.to_s
         @scenarios = scenarios
       end
     end
 
-    class Scenario
+    class Scenario < Node
       attr_reader :name, :steps
       def initialize(name, steps)
-        @name  = name
+        @line, @column = name.line_and_column
+
+        @name  = name.to_s
         @steps = steps
       end
     end
 
-    class Step
+    class Step < Node
       attr_reader :name
       def initialize(name)
-        @name  = name
+        @line, @column = name.line_and_column
+
+        @name  = name.to_s
       end
     end
   end
