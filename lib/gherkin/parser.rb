@@ -6,16 +6,29 @@ module Gherkin
       str(' ' * num)
     end
 
-    rule(:space)    { match('\s').repeat(1) }
+    rule(:space)    { match('\s').repeat }
     rule(:space?)   { space.maybe }
+    rule(:newline)  { match('\n').repeat }
+    rule(:text)     { match('[^\n]').repeat }
 
-    rule(:feature)  { str('Feature:') >> space? >> match('.').repeat(1).as(:feature) }
-    rule(:scenario) { indent(2) >> str('Scenario:') >> space? >> match('.').repeat(1).as(:scenario) }
+    rule(:feature_line)  { str('Feature:') >> space? >> text.as(:name) }
+    rule(:scenario_line) { indent(2) >> str('Scenario:') >> space? >> text.as(:name) }
 
-    rule(:step) { indent(4) >> step_keyword >> space? >> match('.').repeat(1).as(:step) }
     rule(:step_keyword) { str('Given') | str('When') | str('Then') | str('And') | str('But') }
 
-    rule(:comment) { str('#') >> match('.').repeat(1).as(:comment) }
-    rule(:description) { indent(2) >> match('.').repeat(1).as(:description) }
+    rule(:comment) { str('#') >> text.as(:comment) }
+    rule(:description) { indent(2) >> text.as(:description) }
+
+    rule(:step) { indent(4) >> step_keyword >> space? >> text.as(:name) }
+    rule(:steps) { (step.as(:step) >> newline.maybe).repeat }
+
+    rule(:scenario) { scenario_line >> newline >> steps.as(:steps) }
+    rule(:scenarios) { (scenario.as(:scenario) >> newline.maybe).repeat }
+
+    rule(:feature) { feature_line >> newline >> scenarios.as(:scenarios) }
+
+    rule(:main) { feature.as(:feature) }
+
+    root :main
   end
 end
