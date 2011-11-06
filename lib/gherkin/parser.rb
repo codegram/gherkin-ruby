@@ -22,7 +22,9 @@ module Gherkin
     rule(:step) { indent(4) >> step_keyword >> space? >> text.as(:name) }
     rule(:steps) { (step.as(:step) >> newline.maybe).repeat }
 
-    rule(:scenario) { scenario_line >> newline >> steps.as(:steps) }
+    rule(:tag) { indent(2) >> str('@') >> text.as(:name) }
+
+    rule(:scenario) { (tag.as(:tag) >> newline).maybe >> scenario_line >> newline >> steps.as(:steps) }
     rule(:scenarios) { (scenario.as(:scenario) >> newline.maybe).repeat }
 
     rule(:feature) { feature_line >> newline >> scenarios.as(:scenarios) }
