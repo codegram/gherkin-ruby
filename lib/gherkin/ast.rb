@@ -27,15 +27,16 @@ module Gherkin
     end
 
     class Scenario < Node
-      attr_reader :name, :steps
+      attr_reader :name, :steps, :tags
 
       include Enumerable
 
-      def initialize(name, steps=[])
+      def initialize(name, steps=[], tags=[])
         @line, @column = name.line_and_column
 
         @name  = name.to_s
         @steps = steps
+        @tags  = tags
       end
 
       def each
@@ -48,7 +49,16 @@ module Gherkin
       def initialize(name)
         @line, @column = name.line_and_column
 
-        @name  = name.to_s
+        @name = name.to_s
+      end
+    end
+
+    class Tag < Node
+      attr_reader :name
+      def initialize(name)
+        @line, @column = name.line_and_column
+
+        @name = name.to_s
       end
     end
   end

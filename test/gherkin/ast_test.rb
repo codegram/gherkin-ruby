@@ -26,7 +26,7 @@ module Gherkin
       end
     end
 
-    [Feature, Scenario, Step].each do |node|
+    [Feature, Scenario, Step, Tag].each do |node|
       describe node do
         it 'is a Node' do
           node.ancestors.must_include Node
@@ -55,6 +55,19 @@ module Gherkin
           instance = node.new(name, elements)
           instance.each.to_a.must_equal ['foo', 'bar']
         end
+      end
+    end
+
+    describe Scenario do
+      it 'has tags' do
+        name = OpenStruct.new(line_and_column: [2, 13])
+        def name.to_s; 'Name'; end
+
+        steps = ['foo', 'bar']
+        tags  = ['javascript', 'wip']
+
+        instance = Scenario.new(name, steps, tags)
+        instance.tags.must_equal tags
       end
     end
   end

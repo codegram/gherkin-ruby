@@ -1,8 +1,8 @@
-# Gherkin
-Gherkin is a pure Ruby implementation of a [Gherkin](http://github.com/cucumber/gherkin) parser, using [Parslet](http://github.com/kschiess/parslet).
+# gherkin-ruby
+Gherkin-ruby is a pure Ruby implementation of a [Gherkin](http://github.com/cucumber/gherkin) parser, using [Parslet](http://github.com/kschiess/parslet).
 
-# Usage
-You can easily implement your own visitors to traverse the Abstract Syntax Tree:
+## Usage
+You can easily implement your own visitors to traverse the Abstract Syntax Tree. The following example just prints the step names to standard output:
 
 ```ruby
 class MyVisitor
@@ -30,6 +30,10 @@ class MyVisitor
     scenario.each { |step| step.accept(self) }
   end
 
+  def visit_Tag(tag)
+    # Do something nasty with the tag
+  end
+
   def visit_Step(step)
     # Finally, print the step name.
     puts "STEP: #{step.name}"
@@ -41,4 +45,8 @@ visitor = MyVisitor.new
 visitor.visit(ast)
 ```
 
-Work in progress (missing backgrounds, tags, etc)! :D
+## Todo
+
+* Backgrounds
+* Some optimization
+
