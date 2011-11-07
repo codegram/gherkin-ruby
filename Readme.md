@@ -30,6 +30,10 @@ class MyVisitor
     scenario.each { |step| step.accept(self) }
   end
 
+  def visit_Tag(tag)
+    # Do something nasty with the tag
+  end
+
   def visit_Step(step)
     # Finally, print the step name.
     puts "STEP: #{step.name}"
@@ -45,3 +49,4 @@ visitor.visit(ast)
 
 * Backgrounds
 * Some optimization
+
