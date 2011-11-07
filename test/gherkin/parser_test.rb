@@ -40,12 +40,6 @@ module Gherkin
     end
   end
 
-  describe 'Tag parsing' do
-    it 'parses the Scenario Tag' do
-      p(:tag, "@javascript", :name).must_equal "javascript"
-    end
-  end
-
   describe 'Comment parsing' do
     it 'parses a comment ignoring its content' do
       p(:comment, "# My comment").size.must_be :>, 0
@@ -62,14 +56,14 @@ module Gherkin
 
   describe 'Tags parsing' do
     it 'parses many tags' do
-      tags = p(:tags, "  @javascript @wip")
-      tags.first[:name].must_equal 'javascript'
-      tags.last[:name].must_equal 'wip'
+      javascript = p(:tags, "  @javascript @wip", 0)
+      wip        = p(:tags, "  @javascript @wip", 1)
+      javascript[:tag].must_equal 'javascript'
+      wip[:tag].must_equal 'wip'
     end
 
     it 'parses one tag' do
-      tags = p(:tags, "  @javascript")
-      tags.first[:name].must_equal 'javascript'
+      p(:tags, "  @javascript", 0)[:tag].must_equal 'javascript'
     end
   end
 
@@ -89,7 +83,7 @@ module Gherkin
       scenario = "  @javascript\n  Scenario: Parse a scenario\n    Given something happens\n    Then something cooler happens"
       result = parser.scenario.parse(scenario)
 
-      result[:tags].first[:name].must_equal 'javascript'
+      result[:tags].first[:tag].must_equal 'javascript'
       result[:name].must_equal 'Parse a scenario'
       result[:steps][0][:step][:name].must_equal 'something happens'
       result[:steps][1][:step][:name].must_equal 'something cooler happens'
@@ -113,7 +107,7 @@ module Gherkin
 
       result[:feature][:name].must_equal 'My Feature'
 
-      result[:feature][:scenarios][0][:scenario][:tags].first[:name].must_equal 'javascript'
+      result[:feature][:scenarios][0][:scenario][:tags].first[:tag].must_equal 'javascript'
       result[:feature][:scenarios][0][:scenario][:name].must_equal 'something happens'
       result[:feature][:scenarios][0][:scenario][:steps][0][:step][:name].must_equal 'something happens'
       result[:feature][:scenarios][0][:scenario][:steps][1][:step][:name].must_equal 'something cooler happens'
