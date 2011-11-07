@@ -42,7 +42,7 @@ module Gherkin
 
   describe 'Tag parsing' do
     it 'parses the Scenario Tag' do
-      p(:tag, "  @javascript", :name).must_equal "javascript"
+      p(:tag, "@javascript", :name).must_equal "javascript"
     end
   end
 
@@ -57,6 +57,19 @@ module Gherkin
       p(:description, "  In order to know what the heck is Gherkin").size.must_be :>, 0
       p(:description, "  As a developer").size.must_be :>, 0
       p(:description, "  I want it to behave in an expected way").size.must_be :>, 0
+    end
+  end
+
+  describe 'Tags parsing' do
+    it 'parses many tags' do
+      tags = p(:tags, "  @javascript @wip")
+      tags.first[:name].must_equal 'javascript'
+      tags.last[:name].must_equal 'wip'
+    end
+
+    it 'parses one tag' do
+      tags = p(:tags, "  @javascript")
+      tags.first[:name].must_equal 'javascript'
     end
   end
 
@@ -76,7 +89,7 @@ module Gherkin
       scenario = "  @javascript\n  Scenario: Parse a scenario\n    Given something happens\n    Then something cooler happens"
       result = parser.scenario.parse(scenario)
 
-      result[:tag][:name].must_equal 'javascript'
+      result[:tags].first[:name].must_equal 'javascript'
       result[:name].must_equal 'Parse a scenario'
       result[:steps][0][:step][:name].must_equal 'something happens'
       result[:steps][1][:step][:name].must_equal 'something cooler happens'
@@ -100,7 +113,7 @@ module Gherkin
 
       result[:feature][:name].must_equal 'My Feature'
 
-      result[:feature][:scenarios][0][:scenario][:tag][:name].must_equal 'javascript'
+      result[:feature][:scenarios][0][:scenario][:tags].first[:name].must_equal 'javascript'
       result[:feature][:scenarios][0][:scenario][:name].must_equal 'something happens'
       result[:feature][:scenarios][0][:scenario][:steps][0][:step][:name].must_equal 'something happens'
       result[:feature][:scenarios][0][:scenario][:steps][1][:step][:name].must_equal 'something cooler happens'

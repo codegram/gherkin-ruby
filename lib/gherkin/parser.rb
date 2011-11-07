@@ -10,6 +10,7 @@ module Gherkin
     rule(:space?)   { space.maybe }
     rule(:newline)  { match('\n').repeat }
     rule(:text)     { match('[^\n]').repeat }
+    rule(:identifier) { match('\w').repeat }
 
     rule(:feature_line)  { str('Feature:') >> space? >> text.as(:name) }
     rule(:scenario_line) { indent(2) >> str('Scenario:') >> space? >> text.as(:name) }
@@ -22,9 +23,10 @@ module Gherkin
     rule(:step) { indent(4) >> step_keyword >> space? >> text.as(:name) }
     rule(:steps) { (step.as(:step) >> newline.maybe).repeat }
 
-    rule(:tag) { indent(2) >> str('@') >> text.as(:name) }
+    rule(:tag) { str('@') >> identifier.as(:name) }
+    rule(:tags) { indent(2) >> (tag >> str(' ').maybe).repeat(1).as(:tags) }
 
-    rule(:scenario) { (tag.as(:tag) >> newline).maybe >> scenario_line >> newline >> steps.as(:steps) }
+    rule(:scenario) { (tags >> newline).maybe >> scenario_line >> newline >> steps.as(:steps) }
     rule(:scenarios) { (scenario.as(:scenario) >> newline.maybe).repeat }
 
     rule(:feature) { feature_line >> newline >> scenarios.as(:scenarios) }
