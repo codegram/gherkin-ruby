@@ -136,8 +136,8 @@ module Gherkin
 
       result[:feature][:name].must_equal 'My Feature'
 
-      result[:feature][:background][:steps][0][:step][:name].must_equal 'something happens'
-      result[:feature][:background][:steps][1][:step][:name].must_equal 'something cooler happens'
+      result[:feature][:background][0][:step][:name].must_equal 'something happens'
+      result[:feature][:background][1][:step][:name].must_equal 'something cooler happens'
 
       result[:feature][:scenarios][0][:scenario][:name].must_equal 'something else happens'
       result[:feature][:scenarios][0][:scenario][:steps][0][:step][:name].must_equal 'foo'
