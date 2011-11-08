@@ -14,15 +14,36 @@ module Gherkin
 
       include Enumerable
 
-      def initialize(name, scenarios=[])
+      def initialize(name, scenarios=[], background=nil)
         @line, @column = name.line_and_column
 
         @name      = name.to_s
+        @background = background
         @scenarios = scenarios
+      end
+
+      def background
+        @background
       end
 
       def each
         @scenarios.each
+      end
+    end
+
+    class Background < Node
+      attr_reader :steps
+
+      include Enumerable
+
+      def initialize(steps=[])
+        @line, @column = nil.to_s
+
+        @steps = steps
+      end
+
+      def each
+        @steps.each
       end
     end
 

@@ -44,21 +44,31 @@ module Gherkin
       end
     end
 
-    [Feature, Scenario].each do |node|
-      describe node do
-        it 'is Enumerable' do
-          name = OpenStruct.new(line_and_column: [2, 13])
-          def name.to_s; 'Name'; end
+    describe Feature do
+      it 'is Enumerable' do
+        name = OpenStruct.new(line_and_column: [2, 13])
+        def name.to_s; 'Name'; end
 
-          elements = ['foo', 'bar']
+        background = ['foo', 'bar']
+        elements = ['+foo', '+bar']
 
-          instance = node.new(name, elements)
-          instance.each.to_a.must_equal ['foo', 'bar']
-        end
+        instance = Feature.new(name, elements, background )
+        instance.background.each.to_a.must_equal ['foo', 'bar']
+        instance.each.to_a.must_equal ['+foo', '+bar']
       end
     end
 
     describe Scenario do
+      it 'is Enumerable' do
+        name = OpenStruct.new(line_and_column: [2, 13])
+        def name.to_s; 'Name'; end
+
+        elements = ['foo', 'bar']
+
+        instance = Scenario.new(name, elements)
+        instance.each.to_a.must_equal ['foo', 'bar']
+      end
+
       it 'has tags' do
         name = OpenStruct.new(line_and_column: [2, 13])
         def name.to_s; 'Name'; end
@@ -68,6 +78,19 @@ module Gherkin
 
         instance = Scenario.new(name, steps, tags)
         instance.tags.must_equal tags
+      end
+    end
+
+    describe Background do
+      it 'is a Node' do
+        Background.ancestors.must_include Node
+      end
+
+      it 'is Enumerable' do
+        steps = ['foo', 'bar']
+
+        instance = Background.new(steps)
+        instance.each.to_a.must_equal ['foo', 'bar']
       end
     end
   end
