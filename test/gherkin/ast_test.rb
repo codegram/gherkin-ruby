@@ -87,10 +87,15 @@ module Gherkin
       end
 
       it 'is Enumerable' do
-        steps = ['foo', 'bar']
+        steps = [
+          OpenStruct.new(line: 4),
+          OpenStruct.new(line: 5),
+        ]
 
         instance = Background.new(steps)
-        instance.each.to_a.must_equal ['foo', 'bar']
+        instance.line.must_equal 3
+        instance.column.must_equal 3
+        instance.each.to_a.must_equal steps
       end
     end
   end

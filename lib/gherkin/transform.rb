@@ -4,10 +4,12 @@ module Gherkin
     rule(
       feature: {
         name: simple(:name),
-        background: subtree(:background),
+        background: {
+          steps: subtree(:background_steps)
+        },
         scenarios: subtree(:scenarios)
       }
-    ) { AST::Feature.new(name, scenarios, AST::Background.new(background)) }
+    ) { AST::Feature.new(name, scenarios, AST::Background.new(background_steps)) }
 
     # Match feature without background
     rule(
@@ -16,12 +18,6 @@ module Gherkin
         scenarios: subtree(:scenarios)
       }
     ) { AST::Feature.new(name, scenarios, AST::Background.new([])) }
-
-    rule(
-      background: {
-        steps: subtree(:steps)
-      }
-    ) { AST::Background.new(steps) }
 
     # Match scenarios without tags
     rule(

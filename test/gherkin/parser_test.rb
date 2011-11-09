@@ -67,6 +67,15 @@ module Gherkin
     end
   end
 
+  describe 'Background parsing' do
+    it 'parses a background' do
+      background = "  Background:\n    When I do something\n    Then blah"
+      steps = p(:background, background, :steps)
+      steps.first[:step][:name].must_equal 'I do something'
+      steps.last[:step][:name].must_equal 'blah'
+    end
+  end
+
   describe 'Parses scenario objects' do
     it 'parses a Scenario' do
       parser = Gherkin::Parser.new
@@ -136,8 +145,8 @@ module Gherkin
 
       result[:feature][:name].must_equal 'My Feature'
 
-      result[:feature][:background][0][:step][:name].must_equal 'something happens'
-      result[:feature][:background][1][:step][:name].must_equal 'something cooler happens'
+      result[:feature][:background][:steps][0][:step][:name].must_equal 'something happens'
+      result[:feature][:background][:steps][1][:step][:name].must_equal 'something cooler happens'
 
       result[:feature][:scenarios][0][:scenario][:name].must_equal 'something else happens'
       result[:feature][:scenarios][0][:scenario][:steps][0][:step][:name].must_equal 'foo'

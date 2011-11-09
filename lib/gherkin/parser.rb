@@ -29,7 +29,7 @@ module Gherkin
     rule(:scenario) { (tags.as(:tags) >> newline).maybe >> scenario_line >> newline >> steps.as(:steps) }
     rule(:scenarios) { (scenario.as(:scenario) >> newline.maybe).repeat }
 
-    rule(:background) { background_line >> newline >> steps }
+    rule(:background) { background_line >> newline >> steps.as(:steps) }
 
     rule(:feature) { feature_line >> newline >> background.as(:background).maybe >> scenarios.as(:scenarios) }
 

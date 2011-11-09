@@ -32,6 +32,8 @@ module Gherkin
 
       background = @result.background
       background.must_be_kind_of AST::Background
+      background.line.must_equal 3
+      background.column.must_equal 3
       background.steps.first.name.must_equal 'something happens before anything else happens'
       background.steps.first.line.must_equal 4
       background.steps.last.name.must_equal 'more things happens before anything else happens'

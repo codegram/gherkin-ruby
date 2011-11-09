@@ -10,7 +10,7 @@ module Gherkin
     end
 
     class Feature < Node
-      attr_reader :name, :scenarios
+      attr_reader :name, :background, :scenarios
 
       include Enumerable
 
@@ -20,10 +20,6 @@ module Gherkin
         @name      = name.to_s
         @background = background
         @scenarios = scenarios
-      end
-
-      def background
-        @background
       end
 
       def each
@@ -37,7 +33,8 @@ module Gherkin
       include Enumerable
 
       def initialize(steps=[])
-        @line, @column = nil.to_s
+        @line   = steps.first.line - 1
+        @column = 3
 
         @steps = steps
       end
