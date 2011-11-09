@@ -10,19 +10,37 @@ module Gherkin
     end
 
     class Feature < Node
-      attr_reader :name, :scenarios
+      attr_reader :name, :background, :scenarios
 
       include Enumerable
 
-      def initialize(name, scenarios=[])
+      def initialize(name, scenarios=[], background=nil)
         @line, @column = name.line_and_column
 
         @name      = name.to_s
+        @background = background
         @scenarios = scenarios
       end
 
       def each
         @scenarios.each
+      end
+    end
+
+    class Background < Node
+      attr_reader :steps
+
+      include Enumerable
+
+      def initialize(steps=[])
+        @line   = steps.first.line - 1
+        @column = 3
+
+        @steps = steps
+      end
+
+      def each
+        @steps.each
       end
     end
 

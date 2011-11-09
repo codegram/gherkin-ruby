@@ -14,6 +14,7 @@ module Gherkin
 
     rule(:feature_line)  { str('Feature:') >> space? >> text.as(:name) }
     rule(:scenario_line) { indent(2) >> str('Scenario:') >> space? >> text.as(:name) }
+    rule(:background_line) { indent(2) >> str('Background:') }
 
     rule(:step_keyword) { str('Given') | str('When') | str('Then') | str('And') | str('But') }
 
@@ -28,7 +29,9 @@ module Gherkin
     rule(:scenario) { (tags.as(:tags) >> newline).maybe >> scenario_line >> newline >> steps.as(:steps) }
     rule(:scenarios) { (scenario.as(:scenario) >> newline.maybe).repeat }
 
-    rule(:feature) { feature_line >> newline >> scenarios.as(:scenarios) }
+    rule(:background) { background_line >> newline >> steps.as(:steps) }
+
+    rule(:feature) { feature_line >> newline >> background.as(:background).maybe >> scenarios.as(:scenarios) }
 
     rule(:main) { feature.as(:feature) }
 
