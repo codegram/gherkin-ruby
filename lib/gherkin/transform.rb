@@ -1,11 +1,23 @@
 module Gherkin
   class Transform < Parslet::Transform
+    # Match feature with background
+    rule(
+      feature: {
+        name: simple(:name),
+        background: {
+          steps: subtree(:background_steps)
+        },
+        scenarios: subtree(:scenarios)
+      }
+    ) { AST::Feature.new(name, scenarios, AST::Background.new(background_steps)) }
+
+    # Match feature without background
     rule(
       feature: {
         name: simple(:name),
         scenarios: subtree(:scenarios)
       }
-    ) { AST::Feature.new(name, scenarios) }
+    ) { AST::Feature.new(name, scenarios, AST::Background.new([])) }
 
     # Match scenarios without tags
     rule(

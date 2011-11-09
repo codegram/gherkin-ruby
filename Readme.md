@@ -30,6 +30,13 @@ class MyVisitor
     scenario.each { |step| step.accept(self) }
   end
 
+  def visit_Background(background)
+    # Do something nasty with the background
+    # And keep visiting its children:
+
+    background.each { |step| step.accept(self) }
+  end
+
   def visit_Tag(tag)
     # Do something nasty with the tag
   end
@@ -47,6 +54,4 @@ visitor.visit(ast)
 
 ## Todo
 
-* Backgrounds
 * Some optimization
-
