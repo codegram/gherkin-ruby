@@ -1,6 +1,25 @@
 # gherkin-ruby
 Gherkin-ruby is a pure Ruby implementation of a [Gherkin](http://github.com/cucumber/gherkin) parser, using [Parslet](http://github.com/kschiess/parslet).
 
+## Why this one over the official, fast, Ragel-based Gherkin parser?
+
+* Less than 200 LOC.
+* No C-exts
+* No Java/.NET crap.
+* Fast enough for our purposes (using it for the [Spinach](http://github.com/codegram/spinach) project)
+
+## Install
+
+    $ gem install gherkin-ruby
+
+Or in your Gemfile:
+
+```ruby
+# Gemfile
+
+gem 'gherkin-ruby'
+```
+
 ## Usage
 You can easily implement your own visitors to traverse the Abstract Syntax Tree. The following example just prints the step names to standard output:
 
