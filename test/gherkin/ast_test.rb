@@ -82,20 +82,36 @@ module Gherkin
     end
 
     describe Background do
+      let(:steps) do
+        steps = [
+          OpenStruct.new(line: 4),
+          OpenStruct.new(line: 5),
+        ]
+      end
+
       it 'is a Node' do
         Background.ancestors.must_include Node
       end
 
       it 'is Enumerable' do
-        steps = [
-          OpenStruct.new(line: 4),
-          OpenStruct.new(line: 5),
-        ]
-
         instance = Background.new(steps)
-        instance.line.must_equal 3
-        instance.column.must_equal 3
         instance.each.to_a.must_equal steps
+      end
+
+      describe 'when there are background steps' do
+        it 'records line and column' do
+          instance = Background.new(steps)
+          instance.line.must_equal 3
+          instance.column.must_equal 3
+        end
+      end
+
+      describe 'otherwise' do
+        it 'does not' do
+          instance = Background.new([])
+          instance.line.must_equal nil
+          instance.column.must_equal nil
+        end
       end
     end
   end

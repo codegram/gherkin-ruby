@@ -33,8 +33,10 @@ module Gherkin
       include Enumerable
 
       def initialize(steps=[])
-        @line   = steps.first.line - 1
-        @column = 3
+        if steps.any?
+          @line   = steps.first.line - 1
+          @column = 3
+        end
 
         @steps = steps
       end
