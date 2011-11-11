@@ -57,10 +57,13 @@ module Gherkin
   end
 
   describe 'Description parsing' do
-    it 'parses descriptions ignoring their content' do
-      p(:description, "  In order to know what the heck is Gherkin").size.must_be :>, 0
-      p(:description, "  As a developer").size.must_be :>, 0
-      p(:description, "  I want it to behave in an expected way").size.must_be :>, 0
+    it 'parses multiline descriptions' do
+      description = """  In order to know what the heck is Gherkin
+  As a developer
+  I want it to behave in an expected way
+"""
+      parser = Gherkin::Parser.new
+      parser.description.parse(description)
     end
   end
 

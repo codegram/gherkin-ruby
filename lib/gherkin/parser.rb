@@ -14,12 +14,15 @@ module Gherkin
 
     rule(:feature_line)  { str('Feature:') >> space? >> text.as(:name) }
     rule(:scenario_line) { indent(2) >> str('Scenario:') >> space? >> text.as(:name) }
-    rule(:background_line) { indent(2) >> str('Background:') }
 
     rule(:step_keyword) { str('Given') | str('When') | str('Then') | str('And') | str('But') }
 
     rule(:comment) { str('#') >> text.as(:comment) }
-    rule(:description) { indent(2) >> text.as(:description) }
+
+    rule(:description_text) { (str('Background:') | str('Scenario:') | str('@')).absent? >> text }
+    rule(:description) { (indent(2) >> description_text >> newline).repeat }
+
+    rule(:background_line) { indent(2) >> str('Background:') }
 
     rule(:step) { indent(4) >> step_keyword.as(:keyword) >> space? >> text.as(:name) }
     rule(:steps) { (step.as(:step) >> newline.maybe).repeat }
@@ -31,7 +34,7 @@ module Gherkin
 
     rule(:background) { background_line >> newline >> steps.as(:steps) }
 
-    rule(:feature) { feature_line >> newline >> background.as(:background).maybe >> scenarios.as(:scenarios) }
+    rule(:feature) { feature_line >> newline >> description >> background.as(:background).maybe >> scenarios.as(:scenarios) }
 
     rule(:main) { feature.as(:feature) }
 
