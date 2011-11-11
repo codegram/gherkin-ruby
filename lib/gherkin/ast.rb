@@ -65,11 +65,12 @@ module Gherkin
     end
 
     class Step < Node
-      attr_reader :name
-      def initialize(name)
+      attr_reader :name, :keyword
+      def initialize(name, keyword)
         @line, @column = name.line_and_column
 
-        @name = name.to_s
+        @name    = name.to_s
+        @keyword = keyword.to_s
       end
     end
 

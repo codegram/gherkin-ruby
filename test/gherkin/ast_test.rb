@@ -26,7 +26,7 @@ module Gherkin
       end
     end
 
-    [Feature, Scenario, Step, Tag].each do |node|
+    [Feature, Scenario, Tag].each do |node|
       describe node do
         it 'is a Node' do
           node.ancestors.must_include Node
@@ -112,6 +112,23 @@ module Gherkin
           instance.line.must_equal nil
           instance.column.must_equal nil
         end
+      end
+    end
+
+    describe Step do
+      it 'is a Node' do
+        Step.ancestors.must_include Node
+      end
+
+      it 'has a line and column' do
+        name = OpenStruct.new(line_and_column: [2, 13])
+        def name.to_s; 'Name'; end
+
+        instance = Step.new(name, 'Given')
+        instance.name.must_equal 'Name'
+        instance.keyword.must_equal 'Given'
+        instance.line.must_equal 2
+        instance.column.must_equal 13
       end
     end
   end

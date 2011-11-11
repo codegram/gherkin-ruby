@@ -21,7 +21,7 @@ module Gherkin
     rule(:comment) { str('#') >> text.as(:comment) }
     rule(:description) { indent(2) >> text.as(:description) }
 
-    rule(:step) { indent(4) >> step_keyword >> space? >> text.as(:name) }
+    rule(:step) { indent(4) >> step_keyword.as(:keyword) >> space? >> text.as(:name) }
     rule(:steps) { (step.as(:step) >> newline.maybe).repeat }
 
     rule(:tags) { indent(2) >> (str('@') >> identifier.as(:tag) >> str(' ').maybe).repeat(1) }

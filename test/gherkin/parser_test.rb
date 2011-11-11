@@ -19,23 +19,33 @@ module Gherkin
 
     describe 'Steps' do
       it 'parses a Given step' do
-        p(:step, "    Given I have an empty array", :name).must_equal "I have an empty array"
+        step = "    Given I have an empty array"
+        p(:step, step, :name).must_equal "I have an empty array"
+        p(:step, step, :keyword).must_equal "Given"
       end
 
       it 'parses a When step' do
-        p(:step, "    When I have an empty array", :name).must_equal "I have an empty array"
+        step = "    When I have an empty array"
+        p(:step, step, :name).must_equal "I have an empty array"
+        p(:step, step, :keyword).must_equal "When"
       end
 
       it 'parses a Then step' do
-        p(:step, "    Then I have an empty array", :name).must_equal "I have an empty array"
+        step = "    Then I have an empty array"
+        p(:step, step, :name).must_equal "I have an empty array"
+        p(:step, step, :keyword).must_equal "Then"
       end
 
       it 'parses an And step' do
-        p(:step, "    And I have an empty array", :name).must_equal "I have an empty array"
+        step = "    And I have an empty array"
+        p(:step, step, :name).must_equal "I have an empty array"
+        p(:step, step, :keyword).must_equal "And"
       end
 
       it 'parses a But step' do
-        p(:step, "    But I have an empty array", :name).must_equal "I have an empty array"
+        step = "    But I have an empty array"
+        p(:step, step, :name).must_equal "I have an empty array"
+        p(:step, step, :keyword).must_equal "But"
       end
     end
   end

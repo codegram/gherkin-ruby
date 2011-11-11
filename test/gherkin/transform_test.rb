@@ -34,8 +34,10 @@ module Gherkin
       background.must_be_kind_of AST::Background
       background.line.must_equal 3
       background.column.must_equal 3
+      background.steps.first.keyword.must_equal 'Given'
       background.steps.first.name.must_equal 'something happens before anything else happens'
       background.steps.first.line.must_equal 4
+      background.steps.last.keyword.must_equal 'And'
       background.steps.last.name.must_equal 'more things happens before anything else happens'
       background.steps.last.line.must_equal 5
 
@@ -43,8 +45,10 @@ module Gherkin
       first_scenario.must_be_kind_of AST::Scenario
       first_scenario.line.must_equal 7
       first_scenario.name.must_equal 'something happens'
+      first_scenario.steps.first.keyword.must_equal 'Given'
       first_scenario.steps.first.name.must_equal 'something happens'
       first_scenario.steps.first.line.must_equal 8
+      first_scenario.steps.last.keyword.must_equal 'Then'
       first_scenario.steps.last.name.must_equal 'something cooler happens'
       first_scenario.steps.last.line.must_equal 9
 
@@ -56,8 +60,10 @@ module Gherkin
       last_scenario.tags.first.name.must_equal 'javascript'
       last_scenario.tags.last.name.must_equal 'wip'
 
+      last_scenario.steps.first.keyword.must_equal 'Given'
       last_scenario.steps.first.name.must_equal 'foo'
       last_scenario.steps.first.line.must_equal 13
+      last_scenario.steps.last.keyword.must_equal 'Then'
       last_scenario.steps.last.name.must_equal 'bar'
       last_scenario.steps.last.line.must_equal 14
     end

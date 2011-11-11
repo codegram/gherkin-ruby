@@ -39,8 +39,9 @@ module Gherkin
     rule(
       step: {
         name: simple(:name),
+        keyword: simple(:keyword),
       }
-    ) { AST::Step.new(name) }
+    ) { AST::Step.new(name, keyword) }
 
     rule(
       tag: simple(:name)
