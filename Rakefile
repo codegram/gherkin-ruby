@@ -8,4 +8,22 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['./test/**/*_test.rb']
 end
 
-task :default => [:test]
+desc "Regenerate Gherkin-ruby lexer and parser."
+task :regenerate do
+  has_rex  = `which rex`
+  has_racc = `which racc`
+
+  if has_rex && has_racc
+    `rex lib/gherkin/parser/gherkin.rex -o lib/gherkin/parser/lexer.rb`
+    `racc lib/gherkin/parser/gherkin.y -o lib/gherkin/parser/parser.rb`
+  else
+    puts "You need both Rexical and Racc to do that. Install them by doing:"
+    puts
+    puts "\t\tgem install rexical"
+    puts "\t\tgem install racc"
+    puts
+    puts "Or just type `bundle install`."
+  end
+end
+
+task :default => [:regenerate, :test]

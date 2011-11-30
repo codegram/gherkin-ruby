@@ -32,51 +32,42 @@ module Gherkin
           node.ancestors.must_include Node
         end
 
-        it 'has a line and column' do
-          name = OpenStruct.new(line_and_column: [2, 13])
-          def name.to_s; 'Name'; end
-
-          instance = node.new(name)
+        it 'has a line' do
+          instance = node.new("Name")
           instance.name.must_equal 'Name'
-          instance.line.must_equal 2
-          instance.column.must_equal 13
+          instance.must_respond_to :line
         end
       end
     end
 
     describe Feature do
       it 'is Enumerable' do
-        name = OpenStruct.new(line_and_column: [2, 13])
-        def name.to_s; 'Name'; end
-
         background = ['foo', 'bar']
         elements = ['+foo', '+bar']
 
-        instance = Feature.new(name, elements, background )
+        instance = Feature.new("My feature", elements, background )
         instance.background.each.to_a.must_equal ['foo', 'bar']
         instance.each.to_a.must_equal ['+foo', '+bar']
       end
     end
 
     describe Scenario do
+      let(:steps) do
+        steps = [
+          OpenStruct.new(line: 4),
+          OpenStruct.new(line: 5),
+        ]
+      end
+
       it 'is Enumerable' do
-        name = OpenStruct.new(line_and_column: [2, 13])
-        def name.to_s; 'Name'; end
-
-        elements = ['foo', 'bar']
-
-        instance = Scenario.new(name, elements)
-        instance.each.to_a.must_equal ['foo', 'bar']
+        instance = Scenario.new("Name", steps)
+        instance.each.to_a.must_equal steps
       end
 
       it 'has tags' do
-        name = OpenStruct.new(line_and_column: [2, 13])
-        def name.to_s; 'Name'; end
-
-        steps = ['foo', 'bar']
         tags  = ['javascript', 'wip']
 
-        instance = Scenario.new(name, steps, tags)
+        instance = Scenario.new("Name", steps, tags)
         instance.tags.must_equal tags
       end
     end
@@ -99,10 +90,10 @@ module Gherkin
       end
 
       describe 'when there are background steps' do
-        it 'records line and column' do
+        it 'records line' do
           instance = Background.new(steps)
+          instance.pos("file", 3)
           instance.line.must_equal 3
-          instance.column.must_equal 3
         end
       end
 
@@ -110,7 +101,6 @@ module Gherkin
         it 'does not' do
           instance = Background.new([])
           instance.line.must_equal nil
-          instance.column.must_equal nil
         end
       end
     end
@@ -120,15 +110,12 @@ module Gherkin
         Step.ancestors.must_include Node
       end
 
-      it 'has a line and column' do
-        name = OpenStruct.new(line_and_column: [2, 13])
-        def name.to_s; 'Name'; end
-
-        instance = Step.new(name, 'Given')
+      it 'has a line' do
+        instance = Step.new("Name", 'Given')
+        instance.pos("file", 2)
         instance.name.must_equal 'Name'
         instance.keyword.must_equal 'Given'
         instance.line.must_equal 2
-        instance.column.must_equal 13
       end
     end
   end
