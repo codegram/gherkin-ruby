@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "gherkin-ruby"
 
-  s.add_runtime_dependency 'parslet'
+  s.add_runtime_dependency 'rexical'
+  s.add_runtime_dependency 'racc'
   s.add_development_dependency 'minitest'
 
   s.files         = `git ls-files`.split("\n")

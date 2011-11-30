@@ -1,10 +1,9 @@
 # gherkin-ruby
-Gherkin-ruby is a pure Ruby implementation of a [Gherkin](http://github.com/cucumber/gherkin) parser, using [Parslet](http://github.com/kschiess/parslet).
+Gherkin-ruby is a pure Ruby implementation of a [Gherkin](http://github.com/cucumber/gherkin) parser.
 
 ## Why this one over the official, fast, Ragel-based Gherkin parser?
 
 * Less than 200 LOC.
-* No C-exts
 * No Java/.NET crap.
 * Fast enough for our purposes (using it for the [Spinach](http://github.com/codegram/spinach) project)
 
@@ -74,3 +73,4 @@ visitor.visit(ast)
 ## Todo
 
 * Some optimization
+

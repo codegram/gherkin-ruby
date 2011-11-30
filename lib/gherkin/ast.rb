@@ -1,25 +1,28 @@
 module Gherkin
   module AST
     class Node
-      attr_reader :line, :column
+      attr_reader :filename, :line
 
       def accept(visitor)
         name = self.class.name.split('::').last
         visitor.send("visit_#{name}".to_sym, self)
       end
+
+      def pos(filename, line=nil)
+        @filename, @line = filename, line
+      end
     end
 
     class Feature < Node
       attr_reader :name, :background, :scenarios
+      attr_writer :background, :scenarios
 
       include Enumerable
 
       def initialize(name, scenarios=[], background=nil)
-        @line, @column = name.line_and_column
-
-        @name      = name.to_s
+        @name       = name
         @background = background
-        @scenarios = scenarios
+        @scenarios  = scenarios
       end
 
       def each
@@ -29,16 +32,16 @@ module Gherkin
 
     class Background < Node
       attr_reader :steps
+      attr_writer :steps
 
       include Enumerable
 
       def initialize(steps=[])
-        if steps.any?
-          @line   = steps.first.line - 1
-          @column = 3
-        end
-
         @steps = steps
+      end
+
+      def line
+        @steps.first.line - 1 if @steps.any?
       end
 
       def each
@@ -52,11 +55,13 @@ module Gherkin
       include Enumerable
 
       def initialize(name, steps=[], tags=[])
-        @line, @column = name.line_and_column
-
         @name  = name.to_s
         @steps = steps
         @tags  = tags
+      end
+
+      def line
+        @steps.first.line - 1 if @steps.any?
       end
 
       def each
@@ -67,8 +72,6 @@ module Gherkin
     class Step < Node
       attr_reader :name, :keyword
       def initialize(name, keyword)
-        @line, @column = name.line_and_column
-
         @name    = name.to_s
         @keyword = keyword.to_s
       end
@@ -77,9 +80,7 @@ module Gherkin
     class Tag < Node
       attr_reader :name
       def initialize(name)
-        @line, @column = name.line_and_column
-
-        @name = name.to_s
+        @name = name
       end
     end
   end
