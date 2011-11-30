@@ -7,6 +7,10 @@ module Gherkin
         name = self.class.name.split('::').last
         visitor.send("visit_#{name}".to_sym, self)
       end
+
+      def pos(line, column)
+        @line, @column = line, column
+      end
     end
 
     class Feature < Node
@@ -15,11 +19,9 @@ module Gherkin
       include Enumerable
 
       def initialize(name, scenarios=[], background=nil)
-        @line, @column = name.line_and_column
-
-        @name      = name.to_s
+        @name       = name
         @background = background
-        @scenarios = scenarios
+        @scenarios  = scenarios
       end
 
       def each
@@ -52,8 +54,6 @@ module Gherkin
       include Enumerable
 
       def initialize(name, steps=[], tags=[])
-        @line, @column = name.line_and_column
-
         @name  = name.to_s
         @steps = steps
         @tags  = tags
@@ -67,8 +67,6 @@ module Gherkin
     class Step < Node
       attr_reader :name, :keyword
       def initialize(name, keyword)
-        @line, @column = name.line_and_column
-
         @name    = name.to_s
         @keyword = keyword.to_s
       end
@@ -77,8 +75,6 @@ module Gherkin
     class Tag < Node
       attr_reader :name
       def initialize(name)
-        @line, @column = name.line_and_column
-
         @name = name.to_s
       end
     end

@@ -29,7 +29,7 @@ rule
   But                                   { [:BUT, text] }
 
   # Text
-  [^#]*$                                { [:TEXT, text.strip] }
+  [^#\n]*                               { [:TEXT, text.strip] }
 
 inner
   def run(code)

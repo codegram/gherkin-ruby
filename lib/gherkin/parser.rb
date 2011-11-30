@@ -1,6 +1,6 @@
 # require 'parslet'
 require_relative 'parser/lexer'
-# require_relative 'parser/parser'
+require_relative 'parser/parser'
 
 # module Gherkin
 #   class Parser < Parslet::Parser

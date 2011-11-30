@@ -95,7 +95,7 @@ class Gherkin::Lexer < Racc::Parser
       when (text = @ss.scan(/But/))
          action { [:BUT, text] }
 
-      when (text = @ss.scan(/[^#]*$/))
+      when (text = @ss.scan(/[^#\n]*/))
          action { [:TEXT, text.strip] }
 
       else
