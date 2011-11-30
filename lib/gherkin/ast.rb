@@ -1,20 +1,21 @@
 module Gherkin
   module AST
     class Node
-      attr_reader :line, :column
+      attr_reader :filename, :line
 
       def accept(visitor)
         name = self.class.name.split('::').last
         visitor.send("visit_#{name}".to_sym, self)
       end
 
-      def pos(line, column)
-        @line, @column = line, column
+      def pos(filename, line=nil)
+        @filename, @line = filename, line
       end
     end
 
     class Feature < Node
       attr_reader :name, :background, :scenarios
+      attr_writer :background, :scenarios
 
       include Enumerable
 
@@ -31,16 +32,16 @@ module Gherkin
 
     class Background < Node
       attr_reader :steps
+      attr_writer :steps
 
       include Enumerable
 
       def initialize(steps=[])
-        if steps.any?
-          @line   = steps.first.line - 1
-          @column = 3
-        end
-
         @steps = steps
+      end
+
+      def line
+        @steps.first.line - 1 if @steps.any?
       end
 
       def each
@@ -59,6 +60,10 @@ module Gherkin
         @tags  = tags
       end
 
+      def line
+        @steps.first.line - 1 if @steps.any?
+      end
+
       def each
         @steps.each
       end
@@ -75,7 +80,7 @@ module Gherkin
     class Tag < Node
       attr_reader :name
       def initialize(name)
-        @name = name.to_s
+        @name = name
       end
     end
   end

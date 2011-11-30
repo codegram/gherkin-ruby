@@ -7,7 +7,7 @@
 require 'racc/parser'
 # Compile with: rex gherkin.rex -o lexer.rb
 
-class Gherkin::Lexer < Racc::Parser
+class Gherkin::Parser < Racc::Parser
   require 'strscan'
 
   class ScanError < StandardError ; end
@@ -65,7 +65,7 @@ class Gherkin::Lexer < Racc::Parser
       when (text = @ss.scan(/\#.*$/))
         ;
 
-      when (text = @ss.scan(/\n+/))
+      when (text = @ss.scan(/\n/))
          action { [:NEWLINE, text] }
 
       when (text = @ss.scan(/Feature:/))
@@ -109,7 +109,7 @@ class Gherkin::Lexer < Racc::Parser
     token
   end  # def _next_token
 
-  def run(code)
+  def tokenize(code)
     scan_setup(code)
     tokens = []
     while token = next_token

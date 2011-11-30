@@ -1,6 +1,6 @@
 # Compile with: rex gherkin.rex -o lexer.rb
 
-class Gherkin::Lexer
+class Gherkin::Parser
 
 macro
   BLANK         [\ \t]+
@@ -11,7 +11,7 @@ rule
   \#.*$
 
   # Literals
-  \n+                                   { [:NEWLINE, text] }
+  \n                                    { [:NEWLINE, text] }
 
   # Keywords
   Feature:                              { [:FEATURE, text[0..-2]] }
@@ -32,7 +32,7 @@ rule
   [^#\n]*                               { [:TEXT, text.strip] }
 
 inner
-  def run(code)
+  def tokenize(code)
     scan_setup(code)
     tokens = []
     while token = next_token
