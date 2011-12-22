@@ -15,6 +15,7 @@ module Gherkin
 module_eval(<<'...end gherkin.y/module_eval...', 'gherkin.y', 97)
 
   def parse(input)
+    @yydebug = true if ENV['DEBUG_RACC']
     scan_str(input)
   end
 ...end gherkin.y/module_eval...

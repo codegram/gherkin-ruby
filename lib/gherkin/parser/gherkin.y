@@ -96,5 +96,6 @@ end
 ---- inner
 
   def parse(input)
+    @yydebug = true if ENV['DEBUG_RACC']
     scan_str(input)
   end
