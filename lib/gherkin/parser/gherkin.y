@@ -56,8 +56,9 @@ rule
   ;
 
   Steps:
-    Step Newline          { result = [val[0]] }
-  | Steps Step Newline    { result = val[0] << val[1] }
+    Step                  { result = [val[0]] }
+  | Step Newline          { result = [val[0]] }
+  | Step Newline Steps    { val[2].unshift(val[0]); result = val[2] }
   ;
 
   Step:
@@ -71,7 +72,6 @@ rule
   Scenarios:
     Scenario              { result = [val[0]] }
   | Scenarios Scenario    { result = val[0] << val[1] }
-  | Scenarios Newline Scenario { result = val[0] << val[2] }
   ;
 
   Scenario:
