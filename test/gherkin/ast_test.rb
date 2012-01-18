@@ -52,29 +52,29 @@ module Gherkin
     end
 
     describe Scenario do
-      let(:steps) do
-        steps = [
+      before do
+        @steps = [
           OpenStruct.new(line: 4),
           OpenStruct.new(line: 5),
         ]
       end
 
       it 'is Enumerable' do
-        instance = Scenario.new("Name", steps)
-        instance.each.to_a.must_equal steps
+        instance = Scenario.new("Name", @steps)
+        instance.each.to_a.must_equal @steps
       end
 
       it 'has tags' do
         tags  = ['javascript', 'wip']
 
-        instance = Scenario.new("Name", steps, tags)
+        instance = Scenario.new("Name", @steps, tags)
         instance.tags.must_equal tags
       end
     end
 
     describe Background do
-      let(:steps) do
-        steps = [
+      before do
+        @steps = [
           OpenStruct.new(line: 4),
           OpenStruct.new(line: 5),
         ]
@@ -85,13 +85,13 @@ module Gherkin
       end
 
       it 'is Enumerable' do
-        instance = Background.new(steps)
-        instance.each.to_a.must_equal steps
+        instance = Background.new(@steps)
+        instance.each.to_a.must_equal @steps
       end
 
       describe 'when there are background steps' do
         it 'records line' do
-          instance = Background.new(steps)
+          instance = Background.new(@steps)
           instance.pos("file", 3)
           instance.line.must_equal 3
         end

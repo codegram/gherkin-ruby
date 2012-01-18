@@ -1,8 +1,7 @@
 env:
- - RBXOPT=-X19 JRUBY_OPTS="--1.9"
+ - RBXOPT=-X19
 rvm:
   - 1.9.2
   - 1.9.3
   - ruby-head
   - rbx-head
-  - jruby
