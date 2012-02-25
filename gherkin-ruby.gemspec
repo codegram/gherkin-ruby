@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.version     = Gherkin::VERSION
   s.authors     = ["Marc Divins", "Josep M. Bach"]
   s.email       = ["marcdivc@gmail.com", "josep.m.bach@gmail.com"]
-  s.homepage    = "http://github.com/codegram/gherkin"
-  s.summary     = %q{Gherkin-ruby is a Gherkin parser in pure Ruby using Parslet}
-  s.description = %q{Gherkin-ruby is a Gherkin parser in pure Ruby using Parslet}
+  s.homepage    = "http://github.com/codegram/gherkin-ruby"
+  s.summary     = %q{Gherkin-ruby is a Gherkin parser in pure Ruby using Rexical and Racc}
+  s.description = %q{Gherkin-ruby is a Gherkin parser in pure Ruby using Rexical and Racc}
 
   s.rubyforge_project = "gherkin-ruby"
 
