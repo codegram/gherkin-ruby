@@ -6,6 +6,7 @@ macro
   BLANK         [\ \t]+
 
 rule
+  \#\s?locale:                          { [:LOCALE, text[0..-2]] }
   # Whitespace
   {BLANK}       # no action
   \#.*$

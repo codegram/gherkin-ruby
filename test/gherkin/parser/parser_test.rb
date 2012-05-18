@@ -7,6 +7,14 @@ module Gherkin
       parser.parse(input)
     end
 
+    describe 'Locale' do
+      it "finds out a locale if it's explicitly defined" do
+        locale = parse(
+          "# locale: ca\n"
+        ).must_equal "ca"
+      end
+    end
+
     describe 'Feature name and description' do
       it 'parses feature header without description' do
         feature = parse(

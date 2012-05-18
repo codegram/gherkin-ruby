@@ -83,5 +83,9 @@ module Gherkin
         @name = name
       end
     end
+
+    class Locale < Node
+      attr_reader :name, :keyword
+    end
   end
 end

@@ -4,6 +4,7 @@ class Gherkin::Parser
 
 # Declare tokens produced by the lexer
 token NEWLINE
+token LOCALE
 token FEATURE BACKGROUND SCENARIO
 token TAG
 token GIVEN WHEN THEN AND BUT
@@ -12,11 +13,20 @@ token TEXT
 rule
 
   Root:
+    Locale { result = val[0]; }
+  |
+    Feature     { result = val[0] }
+  |
     Feature     { result = val[0]; }
   |
     Feature
       Scenarios { result = val[0]; result.scenarios = val[1] }
   ;
+
+  Locale:
+    LOCALE TEXT { result = val[1] }
+  | LOCALE TEXT Newline { result = val[1] }
+
 
   Newline:
     NEWLINE

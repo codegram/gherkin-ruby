@@ -59,6 +59,9 @@ class Gherkin::Parser < Racc::Parser
     token = case @state
     when nil
       case
+      when (text = @ss.scan(/\#\s?locale:/))
+         action { [:LOCALE, text[0..-2]] }
+
       when (text = @ss.scan(/[ \t]+/))
         ;
 
