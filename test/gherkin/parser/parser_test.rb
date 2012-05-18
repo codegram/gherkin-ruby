@@ -71,6 +71,23 @@ Feature: Do something
         last_scenario.steps.last.name.must_equal "something else"
       end
 
+      it 'parses feature with no ending newline' do
+        feature = parse(%(
+Feature: Do something
+
+  Scenario: Foo bar baz
+    Given blah foo bar
+    Then something else))
+        scenarios = feature.scenarios
+        scenarios.size.must_equal 1
+
+        first_scenario = scenarios.first
+
+        first_scenario.name.must_equal "Foo bar baz"
+        first_scenario.steps.first.name.must_equal "blah foo bar"
+        first_scenario.steps.last.name.must_equal "something else"
+      end
+
       it 'parses feature with scenarios with tags' do
         feature = parse("""
 Feature: Do something
