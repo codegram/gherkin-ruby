@@ -77,7 +77,7 @@ class Gherkin::Parser < Racc::Parser
       when (text = @ss.scan(/Scenario:/))
          action { [:SCENARIO, text[0..-2]] }
 
-      when (text = @ss.scan(/@\w+/))
+      when (text = @ss.scan(/@(\w|-)+/))
          action { [:TAG, text[1..-1]] }
 
       when (text = @ss.scan(/Given/))

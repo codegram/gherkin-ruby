@@ -96,7 +96,7 @@ Feature: Do something
     Given blah foo bar
     Then something else
 
-  @javascript @wip
+  @javascript @wip @with-vcr
   Scenario: Foo bar baz blah
     Given blah foo bar
     Then something else
@@ -105,8 +105,9 @@ Feature: Do something
 
         last_scenario  = scenarios.last
 
-        last_scenario.tags.first.name.must_equal "javascript"
-        last_scenario.tags.last.name.must_equal "wip"
+        last_scenario.tags[0].name.must_equal "javascript"
+        last_scenario.tags[1].name.must_equal "wip"
+        last_scenario.tags[2].name.must_equal "with-vcr"
       end
     end
   end
