@@ -24,6 +24,24 @@ module Gherkin
         feature.name.must_equal "my feature"
       end
 
+      it 'parses feature with tags' do
+        feature = parse("""
+@wip @with-dash
+Feature: Do something
+""")
+        feature.name.must_equal "Do something"
+        feature.tags.first.name.must_equal "wip"
+        feature.tags.last.name.must_equal "with-dash"
+      end
+
+      it 'parses feature with tagsi event without newline at start' do
+        feature = parse(
+          "@wip\nFeature: Do something"
+        )
+        feature.name.must_equal "Do something"
+        feature.tags.first.name.must_equal "wip"
+      end
+
       it 'parses feature with background' do
         feature = parse("""
 Feature: Do something

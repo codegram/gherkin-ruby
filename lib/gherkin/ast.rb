@@ -14,14 +14,15 @@ module Gherkin
     end
 
     class Feature < Node
-      attr_reader :name, :background, :scenarios
-      attr_writer :background, :scenarios
+      attr_reader :name, :background, :scenarios, :tags
+      attr_writer :background, :scenarios, :tags
 
       include Enumerable
 
-      def initialize(name, scenarios=[], background=nil)
+      def initialize(name, scenarios=[], tags=[], background=nil)
         @name       = name
         @background = background
+        @tags       = tags
         @scenarios  = scenarios
       end
 
