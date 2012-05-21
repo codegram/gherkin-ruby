@@ -3,7 +3,7 @@
 class Gherkin::Parser
 
 # Declare tokens produced by the lexer
-token NEWLINE START
+token NEWLINE
 token FEATURE BACKGROUND SCENARIO
 token TAG
 token GIVEN WHEN THEN AND BUT

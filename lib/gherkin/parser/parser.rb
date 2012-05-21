@@ -22,29 +22,29 @@ module_eval(<<'...end gherkin.y/module_eval...', 'gherkin.y', 104)
 ##### State transition tables begin ###
 
 racc_action_table = [
-    18,    18,    18,     4,    20,    45,    18,    10,    21,    14,
-    10,    43,    36,    37,    38,    39,    40,    18,     4,    18,
-     9,    20,    18,    36,    37,    38,    39,    40,    36,    37,
-    38,    39,    40,     4,     4,     9,    14,    10,    10,    36,
-    37,    38,    39,    40,    14,    10,    14,    10,    32,    24,
-    21,    29,     4,    21,    27,     4,    47,    18,    48,     4,
-    26,    51,    11,     4,    18,     4,    18,     4 ]
+    18,    18,    20,     4,    26,    10,    18,    21,    14,    10,
+    43,    36,    37,    38,    39,    40,    18,    18,    14,    10,
+    45,    36,    37,    38,    39,    40,    18,    14,    10,     4,
+     9,    36,    37,    38,    39,    40,    36,    37,    38,    39,
+    40,     4,     9,    14,    10,    10,    18,    20,    32,    24,
+    21,     4,     4,    29,    21,     4,    47,    18,    48,     4,
+    27,    51,    11,     4,    18,     4,    18,     4 ]
 
 racc_action_check = [
-    25,    30,     5,    15,     5,    30,    54,     5,    15,     2,
-     2,    25,    54,    54,    54,    54,    54,    44,     3,    17,
-     3,    17,    46,    44,    44,    44,    44,    44,    46,    46,
-    46,    46,    46,     0,     8,     0,    31,    31,     0,    23,
-    23,    23,    23,    23,    16,    16,    12,    12,    20,     7,
-     6,    14,    29,    19,    11,    34,    35,    41,    42,    43,
-     9,    45,     1,    48,    49,    51,    53,    24 ]
+    25,     5,     5,    15,     9,     5,    54,    15,    31,    31,
+    25,    54,    54,    54,    54,    54,    44,    30,    12,    12,
+    30,    44,    44,    44,    44,    44,    46,     2,     2,     3,
+     3,    46,    46,    46,    46,    46,    23,    23,    23,    23,
+    23,     0,     0,    16,    16,     0,    17,    17,    20,     7,
+     6,     8,    29,    14,    19,    34,    35,    41,    42,    43,
+    11,    45,     1,    48,    49,    51,    53,    24 ]
 
 racc_action_pointer = [
-    31,    62,     3,    16,   nil,     0,    43,    44,    32,    47,
-   nil,    54,    40,   nil,    38,     1,    38,    17,   nil,    46,
-    35,   nil,   nil,    31,    65,    -2,   nil,   nil,   nil,    50,
-    -1,    30,   nil,   nil,    53,    43,   nil,   nil,   nil,   nil,
-   nil,    55,    45,    57,    15,    48,    20,   nil,    61,    62,
+    39,    62,    22,    27,   nil,    -1,    44,    45,    49,    -8,
+   nil,    60,    13,   nil,    41,     1,    38,    44,   nil,    48,
+    36,   nil,   nil,    29,    65,    -2,   nil,   nil,   nil,    50,
+    15,     3,   nil,   nil,    53,    44,   nil,   nil,   nil,   nil,
+   nil,    55,    46,    57,    14,    49,    24,   nil,    61,    62,
    nil,    63,   nil,    64,     4,   nil ]
 
 racc_action_default = [
@@ -81,40 +81,40 @@ racc_goto_default = [
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 15, :_reduce_1,
-  2, 15, :_reduce_2,
-  2, 15, :_reduce_3,
-  3, 15, :_reduce_4,
-  1, 19, :_reduce_none,
-  2, 19, :_reduce_none,
-  1, 18, :_reduce_7,
-  2, 18, :_reduce_8,
-  1, 16, :_reduce_9,
-  2, 16, :_reduce_10,
-  1, 21, :_reduce_11,
-  2, 21, :_reduce_12,
-  3, 21, :_reduce_13,
-  2, 23, :_reduce_14,
-  3, 23, :_reduce_15,
-  2, 24, :_reduce_none,
-  3, 24, :_reduce_none,
-  2, 22, :_reduce_18,
-  2, 25, :_reduce_19,
-  1, 26, :_reduce_20,
-  2, 26, :_reduce_21,
-  3, 26, :_reduce_22,
-  2, 27, :_reduce_23,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  1, 17, :_reduce_29,
-  2, 17, :_reduce_30,
-  4, 29, :_reduce_31,
-  6, 29, :_reduce_32,
-  1, 20, :_reduce_33,
-  2, 20, :_reduce_34 ]
+  1, 14, :_reduce_1,
+  2, 14, :_reduce_2,
+  2, 14, :_reduce_3,
+  3, 14, :_reduce_4,
+  1, 18, :_reduce_none,
+  2, 18, :_reduce_none,
+  1, 17, :_reduce_7,
+  2, 17, :_reduce_8,
+  1, 15, :_reduce_9,
+  2, 15, :_reduce_10,
+  1, 20, :_reduce_11,
+  2, 20, :_reduce_12,
+  3, 20, :_reduce_13,
+  2, 22, :_reduce_14,
+  3, 22, :_reduce_15,
+  2, 23, :_reduce_none,
+  3, 23, :_reduce_none,
+  2, 21, :_reduce_18,
+  2, 24, :_reduce_19,
+  1, 25, :_reduce_20,
+  2, 25, :_reduce_21,
+  3, 25, :_reduce_22,
+  2, 26, :_reduce_23,
+  1, 27, :_reduce_none,
+  1, 27, :_reduce_none,
+  1, 27, :_reduce_none,
+  1, 27, :_reduce_none,
+  1, 27, :_reduce_none,
+  1, 16, :_reduce_29,
+  2, 16, :_reduce_30,
+  4, 28, :_reduce_31,
+  6, 28, :_reduce_32,
+  1, 19, :_reduce_33,
+  2, 19, :_reduce_34 ]
 
 racc_reduce_n = 35
 
@@ -124,19 +124,18 @@ racc_token_table = {
   false => 0,
   :error => 1,
   :NEWLINE => 2,
-  :START => 3,
-  :FEATURE => 4,
-  :BACKGROUND => 5,
-  :SCENARIO => 6,
-  :TAG => 7,
-  :GIVEN => 8,
-  :WHEN => 9,
-  :THEN => 10,
-  :AND => 11,
-  :BUT => 12,
-  :TEXT => 13 }
+  :FEATURE => 3,
+  :BACKGROUND => 4,
+  :SCENARIO => 5,
+  :TAG => 6,
+  :GIVEN => 7,
+  :WHEN => 8,
+  :THEN => 9,
+  :AND => 10,
+  :BUT => 11,
+  :TEXT => 12 }
 
-racc_nt_base = 14
+racc_nt_base = 13
 
 racc_use_result_var = true
 
@@ -160,7 +159,6 @@ Racc_token_to_s_table = [
   "$end",
   "error",
   "NEWLINE",
-  "START",
   "FEATURE",
   "BACKGROUND",
   "SCENARIO",
