@@ -42,10 +42,12 @@ module Gherkin
 
     describe Feature do
       it 'is Enumerable' do
+        tags = ['-foo', '-bar']
         background = ['foo', 'bar']
         elements = ['+foo', '+bar']
 
-        instance = Feature.new("My feature", elements, background )
+        instance = Feature.new("My feature", elements, tags, background )
+        instance.tags.each.to_a.must_equal ['-foo', '-bar']
         instance.background.each.to_a.must_equal ['foo', 'bar']
         instance.each.to_a.must_equal ['+foo', '+bar']
       end

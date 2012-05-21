@@ -3,7 +3,7 @@
 class Gherkin::Parser
 
 # Declare tokens produced by the lexer
-token NEWLINE
+token NEWLINE START
 token FEATURE BACKGROUND SCENARIO
 token TAG
 token GIVEN WHEN THEN AND BUT
@@ -16,12 +16,19 @@ rule
   |
     Feature
       Scenarios { result = val[0]; result.scenarios = val[1] }
+  | FeatureTags Feature { result = val[1]; result.tags = val[0] }
+  | FeatureTags Feature 
+      Scenarios { result = val[1]; result.scenarios = val[2]; result.tags = val[0] }
   ;
 
   Newline:
     NEWLINE
   | Newline NEWLINE
   ;
+
+  FeatureTags:
+    Tags { result = val[0] }
+  | Newline Tags { result = val[1] }
 
   Feature:
     FeatureHeader { result = val[0] }
