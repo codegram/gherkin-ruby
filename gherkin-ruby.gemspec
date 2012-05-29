@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "gherkin-ruby"
 
-  s.add_runtime_dependency 'rexical'
+  s.add_development_dependency 'rexical'
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'racc'
 
