@@ -40,7 +40,7 @@ rule
     FeatureName           { result = val[0] }
   | FeatureName Newline   { result = val[0] }
   | FeatureName Newline
-      Description         { result = val[0] }
+      Description         { result = val[0]; result.description = val[2] }
   ;
 
   FeatureName:
@@ -49,8 +49,8 @@ rule
   ;
 
   Description:
-    TEXT Newline
-  | Description TEXT Newline
+    TEXT Newline             { result = val[0] }
+  | Description TEXT Newline { result = val[0...-1].flatten }
   ;
 
   Background:

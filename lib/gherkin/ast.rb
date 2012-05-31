@@ -16,6 +16,7 @@ module Gherkin
     class Feature < Node
       attr_reader :name, :background, :scenarios, :tags
       attr_writer :background, :scenarios, :tags
+      attr_accessor :description
 
       include Enumerable
 

@@ -96,8 +96,8 @@ racc_reduce_table = [
   3, 20, :_reduce_13,
   2, 22, :_reduce_14,
   3, 22, :_reduce_15,
-  2, 23, :_reduce_none,
-  3, 23, :_reduce_none,
+  2, 23, :_reduce_16,
+  3, 23, :_reduce_17,
   2, 21, :_reduce_18,
   2, 24, :_reduce_19,
   1, 25, :_reduce_20,
@@ -268,7 +268,7 @@ module_eval(<<'.,.,', 'gherkin.y', 40)
 
 module_eval(<<'.,.,', 'gherkin.y', 42)
   def _reduce_13(val, _values, result)
-     result = val[0] 
+     result = val[0]; result.description = val[2] 
     result
   end
 .,.,
@@ -287,9 +287,19 @@ module_eval(<<'.,.,', 'gherkin.y', 47)
   end
 .,.,
 
-# reduce 16 omitted
+module_eval(<<'.,.,', 'gherkin.y', 51)
+  def _reduce_16(val, _values, result)
+     result = val[0] 
+    result
+  end
+.,.,
 
-# reduce 17 omitted
+module_eval(<<'.,.,', 'gherkin.y', 52)
+  def _reduce_17(val, _values, result)
+     result = val[0...-1].flatten 
+    result
+  end
+.,.,
 
 module_eval(<<'.,.,', 'gherkin.y', 57)
   def _reduce_18(val, _values, result)
