@@ -32,6 +32,10 @@ module Gherkin
     it 'generates a nice tree' do
       @result.must_be_kind_of AST::Feature
       @result.line.must_equal 1
+      @result.description.must_equal [
+        "In order to do something",
+        "As a developer",
+        "I want to be happy"]
 
       background = @result.background
       background.must_be_kind_of AST::Background
