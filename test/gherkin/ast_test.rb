@@ -7,7 +7,7 @@ class MyVisitor
   end
 end
 
-class MyNode < Gherkin::AST::Node
+class MyNode < GherkinRuby::AST::Node
   attr_reader :elements
   def initialize(name, elements)
     @name     = name
@@ -15,7 +15,7 @@ class MyNode < Gherkin::AST::Node
   end
 end
 
-module Gherkin
+module GherkinRuby
   module AST
     describe Node do
       it 'is visitable' do

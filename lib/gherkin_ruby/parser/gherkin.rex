@@ -1,6 +1,6 @@
 # Compile with: rex gherkin.rex -o lexer.rb
 
-class Gherkin::Parser
+class GherkinRuby::Parser
 
 macro
   BLANK         [\ \t]+

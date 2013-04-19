@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "gherkin/version"
+require "gherkin_ruby/version"
 
 Gem::Specification.new do |s|
   s.name        = "gherkin-ruby"
-  s.version     = Gherkin::VERSION
+  s.version     = GherkinRuby::VERSION
   s.authors     = ["Marc Divins", "Josep M. Bach"]
   s.email       = ["marcdivc@gmail.com", "josep.m.bach@gmail.com"]
   s.homepage    = "http://github.com/codegram/gherkin-ruby"

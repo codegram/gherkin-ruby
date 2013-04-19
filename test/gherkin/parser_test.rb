@@ -1,6 +1,6 @@
 require_relative '../test_helper'
 
-module Gherkin
+module GherkinRuby
   describe 'Feature parsing' do
     before do
       @scenario = """Feature: My Feature
@@ -25,7 +25,7 @@ module Gherkin
     Then bar
 """
 
-      parser  = Gherkin::Parser.new
+      parser  = GherkinRuby::Parser.new
       @result = parser.parse(@scenario)
     end
 

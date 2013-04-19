@@ -14,8 +14,8 @@ task :regenerate do
   has_racc = `which racc`
 
   if has_rex && has_racc
-    `rex lib/gherkin/parser/gherkin.rex -o lib/gherkin/parser/lexer.rb`
-    `racc #{'--debug' if ENV['DEBUG_RACC']} lib/gherkin/parser/gherkin.y -o lib/gherkin/parser/parser.rb`
+    `rex lib/gherkin_ruby/parser/gherkin.rex -o lib/gherkin_ruby/parser/lexer.rb`
+    `racc #{'--debug' if ENV['DEBUG_RACC']} lib/gherkin_ruby/parser/gherkin.y -o lib/gherkin_ruby/parser/parser.rb`
   else
     puts "You need both Rexical and Racc to do that. Install them by doing:"
     puts

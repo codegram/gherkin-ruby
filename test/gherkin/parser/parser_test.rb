@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module Gherkin
+module GherkinRuby
   describe Parser do
     def parse(input)
       parser = Parser.new

@@ -1,6 +1,6 @@
 # Compile with: racc gherkin.y -o parser.rb
 
-class Gherkin::Parser
+class GherkinRuby::Parser
 
 # Declare tokens produced by the lexer
 token NEWLINE

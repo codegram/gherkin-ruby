@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module Gherkin
+module GherkinRuby
   describe Parser do
     before do
       @lexer = Parser.new

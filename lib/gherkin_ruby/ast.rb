@@ -1,4 +1,4 @@
-module Gherkin
+module GherkinRuby
   module AST
     class Node
       attr_reader :filename, :line
