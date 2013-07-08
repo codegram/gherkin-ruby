@@ -76,3 +76,6 @@ visitor.visit(ast)
 
 * Some optimization
 
+## License
+
+MIT (Expat) License. Copyright 2011 [Codegram Technologies](http://codegram.com)
