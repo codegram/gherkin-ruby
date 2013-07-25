@@ -1,7 +1,7 @@
 # gherkin-ruby [![Build Status](https://secure.travis-ci.org/codegram/gherkin-ruby.png)](http://travis-ci.org/codegram/gherkin-ruby) [![Dependency Status](https://gemnasium.com/codegram/gherkin-ruby.png)](http://gemnasium.com/codegram/gherkin-ruby)
 Gherkin-ruby is a pure Ruby implementation of a [Gherkin](http://github.com/cucumber/gherkin) parser.
 
-Tested with MRI 1.9.2, 1.9.3, ruby-head and Rubinius head.
+Tested with MRI 1.9.3, 2.0.0, head, Rubinius 2.0.0-rc1 and Rubinius head.
 
 ## Why this one over the official, fast, Ragel-based Gherkin parser?
 
@@ -78,4 +78,4 @@ visitor.visit(ast)
 
 ## License
 
-MIT (Expat) License. Copyright 2011 [Codegram Technologies](http://codegram.com)
+MIT (Expat) License. Copyright 2011-2013 [Codegram Technologies](http://codegram.com)
