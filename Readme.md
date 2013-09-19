@@ -3,11 +3,24 @@ Gherkin-ruby is a pure Ruby implementation of a [Gherkin](http://github.com/cucu
 
 Tested with MRI 1.9.3, 2.0.0, head, Rubinius 2.0.0-rc1 and Rubinius head.
 
-## Why this one over the official, fast, Ragel-based Gherkin parser?
+## WARNING: Will be deprecated after Gherkin 3.0
+
+A new rewrite of the Gherkin parser used by Cucumber is planned (for version
+3.0) gherkin-ruby will not add any more features until then, and will
+eventually be deprecated in favor of Gherkin 3.0.
+
+## FAQ
+
+### Why this one over the official, fast, Ragel-based Gherkin parser?
 
 * Less than 200 LOC.
 * No Java/.NET crap.
 * Fast enough for our purposes (using it for the [Spinach](http://github.com/codegram/spinach) project)
+
+### Why don't you support tables?
+
+* Because we believe it's a BDD anti-pattern. Tables show the need for more
+  unit tests.
 
 ## Install
 
@@ -75,6 +88,10 @@ visitor.visit(ast)
 ## Todo
 
 * Some optimization
+
+## FAQ
+
+
 
 ## License
 
