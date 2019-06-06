@@ -20,6 +20,8 @@ module GherkinRuby
     Then something cooler happens
 
   @javascript @wip #@destroy
+  @test-1
+  @test-2 # @test-disabled
   Scenario: something else happens
     Given foo
     Then bar
@@ -60,18 +62,20 @@ module GherkinRuby
 
       last_scenario = @result.scenarios.last
       last_scenario.must_be_kind_of AST::Scenario
-      last_scenario.line.must_equal 18
+      last_scenario.line.must_equal 20
       last_scenario.name.must_equal 'something else happens'
 
-      last_scenario.tags.first.name.must_equal 'javascript'
-      last_scenario.tags.last.name.must_equal 'wip'
+      last_scenario.tags.at(0).name.must_equal 'javascript'
+      last_scenario.tags.at(1).name.must_equal 'wip'
+      last_scenario.tags.at(2).name.must_equal 'test-1'
+      last_scenario.tags.at(3).name.must_equal 'test-2'
 
       last_scenario.steps.first.keyword.must_equal 'Given'
       last_scenario.steps.first.name.must_equal 'foo'
-      last_scenario.steps.first.line.must_equal 19
+      last_scenario.steps.first.line.must_equal 21
       last_scenario.steps.last.keyword.must_equal 'Then'
       last_scenario.steps.last.name.must_equal 'bar'
-      last_scenario.steps.last.line.must_equal 20
+      last_scenario.steps.last.line.must_equal 22
     end
   end
 end

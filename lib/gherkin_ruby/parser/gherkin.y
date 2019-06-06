@@ -17,7 +17,7 @@ rule
     Feature
       Scenarios { result = val[0]; result.scenarios = val[1] }
   | FeatureTags Feature { result = val[1]; result.tags = val[0] }
-  | FeatureTags Feature 
+  | FeatureTags Feature
       Scenarios { result = val[1]; result.scenarios = val[2]; result.tags = val[0] }
   ;
 
@@ -29,6 +29,8 @@ rule
   FeatureTags:
     Tags { result = val[0] }
   | Newline Tags { result = val[1] }
+  | FeatureTags Newline Tags { result += val[2] }
+  ;
 
   Feature:
     FeatureHeader { result = val[0] }
@@ -84,9 +86,14 @@ rule
   Scenario:
     SCENARIO TEXT Newline
       Steps { result = AST::Scenario.new(val[1], val[3]); result.pos(filename, lineno - 1) }
-  | Tags Newline
+  | ScenarioTags
     SCENARIO TEXT Newline
-      Steps { result = AST::Scenario.new(val[3], val[5], val[0]); result.pos(filename, lineno - 2) }
+      Steps { result = AST::Scenario.new(val[2], val[4], val[0]); result.pos(filename, lineno - 2) }
+  ;
+
+  ScenarioTags:
+    Tags Newline { result = val[0] }
+  | Tags Newline ScenarioTags { result += val[2] }
   ;
 
   Tags:
