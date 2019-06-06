@@ -34,6 +34,20 @@ Feature: Do something
         feature.tags.last.name.must_equal "with-dash"
       end
 
+      it 'parses feature with tags on multiple lines' do
+        feature = parse("""
+@wip
+@with-dash
+@third @fourth
+Feature: Do something
+""")
+        feature.name.must_equal "Do something"
+        feature.tags[0].name.must_equal "wip"
+        feature.tags[1].name.must_equal "with-dash"
+        feature.tags[2].name.must_equal "third"
+        feature.tags[3].name.must_equal "fourth"
+      end
+
       it 'parses feature with tagsi event without newline at start' do
         feature = parse(
           "@wip\nFeature: Do something"
@@ -126,6 +140,33 @@ Feature: Do something
         last_scenario.tags[0].name.must_equal "javascript"
         last_scenario.tags[1].name.must_equal "wip"
         last_scenario.tags[2].name.must_equal "with-vcr"
+      end
+
+      it 'parses feature with scenarios with tags on multiple lines' do
+        feature = parse("""
+Feature: Do something
+
+  Scenario: Foo bar baz
+    Given blah foo bar
+    Then something else
+
+  @javascript @wip
+  @with-vcr
+  @forelast
+  @last
+  Scenario: Foo bar baz blah
+    Given blah foo bar
+    Then something else
+""")
+        scenarios = feature.scenarios
+
+        last_scenario = scenarios.last
+
+        last_scenario.tags[0].name.must_equal "javascript"
+        last_scenario.tags[1].name.must_equal "wip"
+        last_scenario.tags[2].name.must_equal "with-vcr"
+        last_scenario.tags[3].name.must_equal "forelast"
+        last_scenario.tags[4].name.must_equal "last"
       end
     end
   end
