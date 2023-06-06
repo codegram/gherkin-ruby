@@ -27,6 +27,7 @@ rule
   Then                                  { [:THEN, text] }
   And                                   { [:AND, text] }
   But                                   { [:BUT, text] }
+  \*                                    { [:STAR, text] }
 
   # Text
   [^#\n]*                               { [:TEXT, text.strip] }

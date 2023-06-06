@@ -95,6 +95,9 @@ class GherkinRuby::Parser < Racc::Parser
                   when (text = @ss.scan(/But/))
                      action { [:BUT, text] }
 
+                  when (text = @ss.scan(/\*/))
+                     action { [:STAR, text] }
+
                   when (text = @ss.scan(/[^#\n]*/))
                      action { [:TEXT, text.strip] }
 
