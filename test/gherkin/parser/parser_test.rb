@@ -111,8 +111,8 @@ Feature: Do something
 Feature: Do something
 
   Scenario: Foo bar baz
-    Given blah foo bar
-    Then something else
+    * blah foo bar
+    * something else
 
   @javascript @wip @with-vcr
   Scenario: Foo bar baz blah

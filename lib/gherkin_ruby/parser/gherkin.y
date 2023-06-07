@@ -6,7 +6,7 @@ class GherkinRuby::Parser
 token NEWLINE
 token FEATURE BACKGROUND SCENARIO
 token TAG
-token GIVEN WHEN THEN AND BUT
+token GIVEN WHEN THEN AND BUT STAR
 token TEXT
 
 rule
@@ -73,7 +73,7 @@ rule
   ;
 
   Keyword:
-    GIVEN | WHEN | THEN | AND | BUT
+    GIVEN | WHEN | THEN | AND | BUT | STAR
   ;
 
   Scenarios:

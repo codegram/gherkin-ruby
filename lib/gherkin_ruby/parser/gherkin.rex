@@ -19,7 +19,7 @@ rule
   Scenario:                             { [:SCENARIO, text[0..-2]] }
 
   # Tags
-  @(\w|-)+                              { [:TAG, text[1..-1]] }
+  @(\w|-|:)+                              { [:TAG, text[1..-1]] }
 
   # Step keywords
   Given                                 { [:GIVEN, text] }
@@ -27,6 +27,7 @@ rule
   Then                                  { [:THEN, text] }
   And                                   { [:AND, text] }
   But                                   { [:BUT, text] }
+  \*                                    { [:STAR, text] }
 
   # Text
   [^#\n]*                               { [:TEXT, text.strip] }
